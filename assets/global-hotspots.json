@@ -1,0 +1,16 @@
+[
+{
+    "id": "cheltenham-master",
+    "label": "Cheltenham Master POP",
+    "message": "Fully operational\nServing EMEA Region\nPOP capacity: 800,000 DAU (@5% concurrency 40,000 users)\nIn test operation\nServing Worldwide\nNode capacity: 1,000,000 DAU (@1% concurrency 10,000 users)",
+    "lat": 79.8994,
+    "lon": -5.0783
+  },
+  {
+    "id": "ljubljana",
+    "label": "Ljubljana POP",
+    "message": "Fully operational\nServing Central and Eastern Europe\nPOP capacity: 400,000 DAU (@5% concurrency 20,000 users)",
+    "lat": 70.0569,
+    "lon": 35.5058
+  }
+]

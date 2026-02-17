@@ -1,0 +1,16 @@
+[
+  {
+    "id": "angola",
+    "label": "Angola POP",
+    "message": "Fully operational\nServing Africell subscribers nationwide\nPOP capacity: 400,000 DAU (@5% concurrency 20,000 users)",
+    "lat": -8.839,
+    "lon": 13.2894
+  },
+  {
+    "id": "johannesburg",
+    "label": "Johannesburg POP",
+    "message": "To be operational in March 2026\nServing sub-Saharan Africa\nPOP capacity: 400,000 DAU (@5% concurrency 20,000 users)",
+    "lat": -38.2041,
+    "lon": 45.0473
+  }
+]

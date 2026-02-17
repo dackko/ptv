@@ -1,0 +1,9 @@
+[
+  {
+    "id": "singapore",
+    "label": "Singapore POP",
+    "message": "To be operational in March 2026\nServing Eastern Hemisphere from India to Oceania\nPOP capacity: 400,000 DAU (@5% concurrency 20,000 users)",
+    "lat": 1.3521,
+    "lon": 152.8198
+  }
+]

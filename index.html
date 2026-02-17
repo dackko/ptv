@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>3D World Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        html,
+        body {
+            margin: 0;
+            height: 100%;
+            background: #f1efed;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 13px;
+            background: #ffffff;
+            padding: 8px 10px;
+            border-radius: 6px;
+        }
+
+        .map-tooltip {
+            position: fixed;
+            background: #1f232e;
+            color: #ffffff;
+            padding: 14px 16px;
+            border-radius: 10px;
+            font-family: Inter, system-ui, sans-serif;
+            font-size: 0.9rem;
+            max-width: min(280px, calc(100vw - 24px));
+            line-height: 1.4;
+            pointer-events: none;
+
+            opacity: 0;
+            visibility: hidden;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+
+            transform: translate3d(0, 4px, 0) scale(0.98);
+            transform-origin: top left;
+            will-change: transform, opacity;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+            white-space: pre-line;
+        }
+
+        .map-tooltip.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translate3d(0, 0, 0) scale(1);
+        }
+    </style>
+
+    <!-- IMPORT MAP -->
+    <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+
+<body>
+    <div id="tooltip" class="map-tooltip"></div>
+    <script type="module" src="./js/main.js"></script>
+</body>
+
+</html>

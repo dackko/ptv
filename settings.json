@@ -1,0 +1,302 @@
+{
+  "HOTSPOT_LAYOUT_PRESETS": {
+    "classic": {
+      "topScale": 1,
+      "bottomScale": 1,
+      "heightScale": 1,
+      "domeHeightRatio": 0.3,
+      "radialSegments": 30,
+      "sideRoughness": 0.3,
+      "sideMetalness": 0.01,
+      "capRoughness": 0.4,
+      "capMetalness": 0.08,
+      "capClearcoat": 0.5,
+      "capClearcoatRoughness": 0.35
+    },
+    "tower": {
+      "topScale": 0.58,
+      "bottomScale": 1.1,
+      "heightScale": 1.38,
+      "domeHeightRatio": 0.16,
+      "radialSegments": 32,
+      "sideRoughness": 0.24,
+      "sideMetalness": 0.05,
+      "capRoughness": 0.22,
+      "capMetalness": 0.22,
+      "capClearcoat": 0.72,
+      "capClearcoatRoughness": 0.18
+    }
+  },
+  "HOTSPOT_COLORS": {
+    "default": "0x23d400",
+    "global": "0x23d400",
+    "regional": "0xf33030",
+    "telco": "0xff4fa3",
+    "singapore": "0x006aff"
+  },
+  "HOTSPOT_CONNECTION_PAIRS": [
+    {
+      "fromId": "los-angeles",
+      "toId": "dallas"
+    },
+    {
+      "fromId": "los-angeles",
+      "toId": "omaha"
+    },
+    {
+      "fromId": "los-angeles",
+      "toId": "miami"
+    },
+    {
+      "fromId": "omaha",
+      "toId": "new-jersey"
+    },
+    {
+      "fromId": "omaha",
+      "toId": "dallas"
+    },
+    {
+      "fromId": "omaha",
+      "toId": "atlanta"
+    },
+    {
+      "fromId": "dallas",
+      "toId": "atlanta"
+    },
+    {
+      "fromId": "atlanta",
+      "toId": "new-jersey"
+    },
+    {
+      "fromId": "atlanta",
+      "toId": "miami"
+    },
+    {
+      "fromId": "miami",
+      "toId": "angola"
+    },
+    {
+      "fromId": "miami",
+      "toId": "cheltenham-master"
+    },
+    {
+      "fromId": "angola",
+      "toId": "ljubljana"
+    },
+    {
+      "fromId": "angola",
+      "toId": "cheltenham-master"
+    },
+    {
+      "fromId": "angola",
+      "toId": "johannesburg"
+    },
+    {
+      "fromId": "johannesburg",
+      "toId": "ljubljana"
+    },
+    {
+      "fromId": "johannesburg",
+      "toId": "singapore"
+    },
+    {
+      "fromId": "singapore",
+      "toId": "ljubljana"
+    },
+    {
+      "fromId": "ljubljana",
+      "toId": "cheltenham-master"
+    },
+    {
+      "fromId": "cheltenham-master",
+      "toId": "new-jersey"
+    }
+  ],
+  "HOTSPOT_DATA_SOURCES": [
+    {
+      "type": "global",
+      "url": "./assets/global-hotspots.json"
+    },
+    {
+      "type": "regional",
+      "url": "./assets/regional-hotspots.json"
+    },
+    {
+      "type": "telco",
+      "url": "./assets/telco-hotspots.json"
+    },
+    {
+      "type": "singapore",
+      "url": "./assets/singapore-hotspots.json"
+    }
+  ],
+  "MAP_DOT_SOURCE": "./assets/map_dots.json",
+  "CONFIG": {
+    "map": {
+      "offsetX": -0.8,
+      "offsetY": -0.8,
+      "backgroundColor": "0xf1efed"
+    },
+    "camera": {
+      "frustumSize": 15,
+      "near": 0.1,
+      "far": 100,
+      "position": {
+        "x": -3,
+        "y": 22,
+        "z": 22
+      },
+      "defaultZoom": 1.5
+    },
+    "controls": {
+      "enableDamping": true,
+      "dampingFactor": 0.08,
+      "enablePan": true,
+      "enableZoom": true,
+      "enableRotate": true,
+      "minPolarAngle": 0.12566370614359174,
+      "maxPolarAngle": 1.0471975511965976,
+      "rotateSpeed": 0.4,
+      "zoomSpeed": 0.8,
+      "panSpeed": 0.8,
+      "screenSpacePanning": true,
+      "minZoom": 1.5,
+      "maxZoom": 3.5
+    },
+    "performance": {
+      "maxPixelRatio": 1.25
+    },
+    "lighting": {
+      "ambientIntensity": 0.32,
+      "directional": {
+        "intensity": 1.5,
+        "position": {
+          "x": -15,
+          "y": 25,
+          "z": -10
+        },
+        "castShadow": true,
+        "shadow": {
+          "mapSize": 2048,
+          "near": 1,
+          "far": 50,
+          "bounds": 20,
+          "opacity": 0.34,
+          "bias": -0.00025,
+          "normalBias": 0.003
+        }
+      },
+      "topLight": {
+        "intensity": 1.1,
+        "position": {
+          "x": 0,
+          "y": 12,
+          "z": 6
+        }
+      }
+    },
+    "interaction": {
+      "hoverCooldownFrames": 2,
+      "hoverFalloff": 0.92
+    },
+    "dots": {
+      "radius": 0.09,
+      "height": 0.3,
+      "color": "0x7ae0ff",
+      "spacing": 1.5,
+      "dome": {
+        "heightRatio": 0.3,
+        "segments": 8
+      },
+      "material": {
+        "roughness": 0.25,
+        "metalness": 0
+      },
+      "capMaterial": {
+        "roughness": 0.4,
+        "metalness": 0.05,
+        "clearcoat": 0.45,
+        "clearcoatRoughness": 0.35
+      }
+    },
+    "dotGeometry": {
+      "radialSegments": 32,
+      "heightMultiplier": 1.15,
+      "topRadiusFactor": 0.98
+    },
+    "hotspots": {
+      "radiusMultiplier": 1.5,
+      "heightMultiplier": 2.2,
+      "radialSegments": 30,
+      "dome": {
+        "heightRatio": 0.3,
+        "segments": 8
+      },
+      "layout": {
+        "active": "tower"
+      },
+      "effects": {
+        "glow": {
+          "enabled": true,
+          "radiusMultiplier": 2.2,
+          "thickness": 0.16,
+          "opacity": 1,
+          "yOffset": 0.02,
+          "heightFactor": 0.14,
+          "pulseAmplitude": 0.08,
+          "pulseSpeed": 1.3,
+          "segments": 40
+        },
+        "idle": {
+          "enabled": true,
+          "amplitude": 0.03,
+          "speed": 1,
+          "phaseStep": 0.55
+        }
+      },
+      "connectionLine": {
+        "enabled": true,
+        "drawSequential": false,
+        "color": "0x1f232e",
+        "opacity": 0.55,
+        "heightOffset": 0,
+        "arcHeight": 0.1,
+        "segments": 10,
+        "thickness": 0.017,
+        "radialSegments": 6
+      },
+      "material": {
+        "roughness": 0.3,
+        "metalness": 0.01
+      },
+      "capMaterial": {
+        "roughness": 0.4,
+        "metalness": 0.08,
+        "clearcoat": 0.5,
+        "clearcoatRoughness": 0.35
+      }
+    },
+    "hover": {
+      "radius": 0.35,
+      "maxLift": 0.55,
+      "easing": 0.16,
+      "threshold": 0.001
+    },
+    "ui": {
+      "canvasLogo": {
+        "enabled": true,
+        "textureUrl": "./assets/Dark_Font.png",
+        "opacity": 1,
+        "sizeByViewportHeight": 0.07,
+        "placementMode": "map",
+        "mapAnchorLat": -36,
+        "mapAnchorLon": 76,
+        "mapAnchorXOffset": 3.5,
+        "mapAnchorYOffset": 0.02,
+        "marginXByViewportWidth": 0.02,
+        "marginYByViewportHeight": 0.03,
+        "cameraDistance": 1
+      }
+    }
+  }
+}
