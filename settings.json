@@ -135,7 +135,7 @@
     "map": {
       "offsetX": -0.8,
       "offsetY": -0.8,
-      "backgroundColor": "0xf1efed"
+      "backgroundColor": "0xffffff"
     },
     "camera": {
       "frustumSize": 15,
