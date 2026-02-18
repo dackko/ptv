@@ -152,7 +152,7 @@
       "enableDamping": true,
       "dampingFactor": 0.08,
       "enablePan": true,
-      "enableZoom": false,
+      "enableZoom": true,
       "enableRotate": true,
       "minPolarAngle": 0.12566370614359174,
       "maxPolarAngle": 1.0471975511965976,

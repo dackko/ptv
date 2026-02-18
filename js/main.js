@@ -775,6 +775,52 @@ controls.update();
 // Save camera state whenever the user interacts
 controls.addEventListener("change", saveCameraState);
 
+// ================= SCROLL TRAP PREVENTION =================
+// Disable controls by default so page scroll is never captured until the
+// user explicitly clicks into the map.
+controls.enabled = false;
+
+const mapOverlay = document.getElementById("map-overlay");
+let mapActive = false;
+let isPointerDown = false;
+
+function activateMap() {
+  controls.enabled = true;
+  mapActive = true;
+  mapOverlay.style.display = "none";
+}
+
+function deactivateMap() {
+  controls.enabled = false;
+  mapActive = false;
+  mapOverlay.style.display = "";
+}
+
+mapOverlay.addEventListener("click", activateMap);
+
+// Touch: first tap activates (prevent the tap from also firing a click on the
+// scene before the map is ready to handle it).
+mapOverlay.addEventListener("touchend", (e) => {
+  e.preventDefault();
+  activateMap();
+}, { passive: false });
+
+// Release when the pointer leaves the container, but not mid-drag.
+container.addEventListener("pointerleave", () => {
+  if (isPointerDown) return;
+  deactivateMap();
+});
+
+// Track drag state so we don't deactivate while the user is still dragging.
+window.addEventListener("pointerup", () => {
+  isPointerDown = false;
+});
+
+// Escape key releases focus.
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && mapActive) deactivateMap();
+});
+
 // ================= LIGHTING =================
 scene.add(new THREE.AmbientLight(0xffffff, CONFIG.lighting.ambientIntensity));
 
@@ -1291,6 +1337,7 @@ renderer.domElement.addEventListener("pointermove", (e) => {
 });
 
 renderer.domElement.addEventListener("pointerdown", (e) => {
+  isPointerDown = true;
   updatePointerState(e.clientX, e.clientY);
 
   // Update mouse coords immediately on tap

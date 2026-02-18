@@ -66,6 +66,29 @@
             visibility: visible;
             transform: translate3d(0, 0, 0) scale(1);
         }
+
+        #map-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        #map-overlay-hint {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.58);
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-family: Inter, system-ui, sans-serif;
+            white-space: nowrap;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
     </style>
 
     <!-- IMPORT MAP -->
@@ -81,6 +104,9 @@
 
 <body>
     <div id="map-container">
+        <div id="map-overlay">
+            <div id="map-overlay-hint">Click to interact</div>
+        </div>
         <div id="tooltip" class="map-tooltip"></div>
     </div>
     <script type="module" src="./js/main.js"></script>
