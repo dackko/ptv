@@ -548,12 +548,15 @@ function latLonToMapXY(lat, lon, mapWidth = 20, mapHeight = 10) {
   return { x, y };
 }
 
+// ================= CONTAINER =================
+const container = document.getElementById("map-container");
+
 // ================= SCENE =================
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(CONFIG.map.backgroundColor);
 
 // ================= CAMERA =================
-const aspect = window.innerWidth / window.innerHeight;
+const aspect = container.clientWidth / container.clientHeight;
 const f = CONFIG.camera.frustumSize;
 
 const camera = new THREE.OrthographicCamera(
@@ -612,13 +615,13 @@ camera.lookAt(savedCamera ? savedCamera.tx : 0, savedCamera ? savedCamera.ty : 0
 
 // ================= RENDERER =================
 const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize(container.clientWidth, container.clientHeight);
 renderer.setPixelRatio(
   Math.min(window.devicePixelRatio, CONFIG.performance.maxPixelRatio),
 );
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-document.body.appendChild(renderer.domElement);
+container.appendChild(renderer.domElement);
 
 let mapDataRequested = false;
 let mapStarted = false;
@@ -1273,25 +1276,27 @@ function updatePointerState(clientX, clientY) {
   pointerClientY = clientY;
 }
 
-window.addEventListener("pointermove", (e) => {
+renderer.domElement.addEventListener("pointermove", (e) => {
   updatePointerState(e.clientX, e.clientY);
   if (activeHotspot) {
     positionTooltip(pointerClientX, pointerClientY);
   }
 
   // Update normalized device coords for raycasting
-  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  const rect = renderer.domElement.getBoundingClientRect();
+  mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
 
   handleHotspots(false);
 });
 
-window.addEventListener("pointerdown", (e) => {
+renderer.domElement.addEventListener("pointerdown", (e) => {
   updatePointerState(e.clientX, e.clientY);
 
   // Update mouse coords immediately on tap
-  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  const rect = renderer.domElement.getBoundingClientRect();
+  mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
 
   handleHotspots(true);
 });
@@ -1391,8 +1396,10 @@ function animate() {
 }
 
 // ================= RESIZE =================
-window.addEventListener("resize", () => {
-  const a = window.innerWidth / window.innerHeight;
+new ResizeObserver(() => {
+  const w = container.clientWidth;
+  const h = container.clientHeight;
+  const a = w / h;
   const f = CONFIG.camera.frustumSize;
 
   camera.left = -f * a;
@@ -1401,7 +1408,7 @@ window.addEventListener("resize", () => {
   camera.bottom = -f;
   camera.updateProjectionMatrix();
 
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(w, h);
   renderer.setPixelRatio(
     Math.min(window.devicePixelRatio, CONFIG.performance.maxPixelRatio),
   );
@@ -1409,7 +1416,7 @@ window.addEventListener("resize", () => {
   if (activeHotspot) {
     positionTooltip(pointerClientX, pointerClientY);
   }
-});
+}).observe(container);
 
 startMap();
 
