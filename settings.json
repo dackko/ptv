@@ -143,10 +143,10 @@
       "far": 100,
       "position": {
         "x": -3,
-        "y": 22,
+        "y": 13,
         "z": 22
       },
-      "defaultZoom": 1.5
+      "defaultZoom": 2.0
     },
     "controls": {
       "enableDamping": true,

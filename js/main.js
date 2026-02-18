@@ -572,29 +572,10 @@ const camera = new THREE.OrthographicCamera(
 const CAMERA_STORAGE_KEY = "map_camera_state";
 
 function getSavedCameraState() {
-  try {
-    const raw = localStorage.getItem(CAMERA_STORAGE_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch (_) {}
   return null;
 }
 
-function saveCameraState() {
-  try {
-    localStorage.setItem(
-      CAMERA_STORAGE_KEY,
-      JSON.stringify({
-        px: camera.position.x,
-        py: camera.position.y,
-        pz: camera.position.z,
-        zoom: camera.zoom,
-        tx: controls.target.x,
-        ty: controls.target.y,
-        tz: controls.target.z,
-      }),
-    );
-  } catch (_) {}
-}
+function saveCameraState() {}
 
 const savedCamera = getSavedCameraState();
 
