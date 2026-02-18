@@ -565,17 +565,50 @@ const camera = new THREE.OrthographicCamera(
   CONFIG.camera.far,
 );
 
-camera.position.set(
-  CONFIG.camera.position.x,
-  CONFIG.camera.position.y,
-  CONFIG.camera.position.z,
-);
+// ================= CAMERA PERSISTENCE =================
+const CAMERA_STORAGE_KEY = "map_camera_state";
 
-// DEFAULT ZOOM
-camera.zoom = CONFIG.camera.defaultZoom;
+function getSavedCameraState() {
+  try {
+    const raw = localStorage.getItem(CAMERA_STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch (_) {}
+  return null;
+}
+
+function saveCameraState() {
+  try {
+    localStorage.setItem(
+      CAMERA_STORAGE_KEY,
+      JSON.stringify({
+        px: camera.position.x,
+        py: camera.position.y,
+        pz: camera.position.z,
+        zoom: camera.zoom,
+        tx: controls.target.x,
+        ty: controls.target.y,
+        tz: controls.target.z,
+      }),
+    );
+  } catch (_) {}
+}
+
+const savedCamera = getSavedCameraState();
+
+if (savedCamera) {
+  camera.position.set(savedCamera.px, savedCamera.py, savedCamera.pz);
+  camera.zoom = savedCamera.zoom;
+} else {
+  camera.position.set(
+    CONFIG.camera.position.x,
+    CONFIG.camera.position.y,
+    CONFIG.camera.position.z,
+  );
+  camera.zoom = CONFIG.camera.defaultZoom;
+}
 camera.updateProjectionMatrix();
 
-camera.lookAt(0, 0, 0);
+camera.lookAt(savedCamera ? savedCamera.tx : 0, savedCamera ? savedCamera.ty : 0, savedCamera ? savedCamera.tz : 0);
 
 // ================= RENDERER =================
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -724,12 +757,20 @@ Object.assign(controls, {
   screenSpacePanning: CONFIG.controls.screenSpacePanning,
 });
 
+// Restore saved orbit target
+if (savedCamera) {
+  controls.target.set(savedCamera.tx, savedCamera.ty, savedCamera.tz);
+}
+
 // Explicit constraints
 controls.minPolarAngle = CONFIG.controls.minPolarAngle;
 controls.maxPolarAngle = CONFIG.controls.maxPolarAngle;
 controls.minZoom = CONFIG.controls.minZoom;
 controls.maxZoom = CONFIG.controls.maxZoom;
 controls.update();
+
+// Save camera state whenever the user interacts
+controls.addEventListener("change", saveCameraState);
 
 // ================= LIGHTING =================
 scene.add(new THREE.AmbientLight(0xffffff, CONFIG.lighting.ambientIntensity));
