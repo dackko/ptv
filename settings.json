@@ -284,7 +284,7 @@
     },
     "ui": {
       "canvasLogo": {
-        "enabled": true,
+        "enabled": false,
         "textureUrl": "./assets/Dark_Font.png",
         "opacity": 1,
         "sizeByViewportHeight": 0.07,
